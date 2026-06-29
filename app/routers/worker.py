@@ -6,4 +6,7 @@ router = APIRouter()
 @router.get("/status")
 async def worker_status():
     status = get_worker_status()
-    return {"status": "online", "active_workers": status}
+    return {
+    "online": True,
+    "active_workers": status
+}
