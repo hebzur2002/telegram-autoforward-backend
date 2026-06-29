@@ -48,8 +48,10 @@ async def send_otp(req: SendOTPRequest, db: AsyncSession = Depends(get_db)):
         await db.commit()
         return {"success": True, "message": "OTP sent"}
     except Exception as e:
-        await client.disconnect()
-        raise HTTPException(status_code=400, detail=str(e))
+    import traceback
+    traceback.print_exc()
+    await client.disconnect()
+    raise HTTPException(status_code=400, detail=str(e))
 
 @router.post("/verify-otp")
 async def verify_otp(req: VerifyOTPRequest, db: AsyncSession = Depends(get_db)):
