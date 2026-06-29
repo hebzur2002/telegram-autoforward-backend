@@ -31,6 +31,15 @@ class Session(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
     last_active = Column(DateTime, default=datetime.utcnow)
 
+class PendingAuth(Base):
+    __tablename__ = "pending_auths"
+
+    id = Column(Integer, primary_key=True)
+    phone = Column(String, unique=True, nullable=False, index=True)
+    phone_code_hash = Column(String, nullable=False)
+    session_string = Column(Text, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
 class Rule(Base):
     __tablename__ = "rules"
     id = Column(Integer, primary_key=True)
